@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine 預測結果</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #label-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>預測結果</h1>
+
+    <!-- 顯示上傳的圖片 -->
+    <div>
+        <img id="uploaded-image" src="{{ url_for('static', filename='uploads/' + filename) }}" width="200px" alt="Uploaded Image">
+    </div>
+    <div id="label-container"></div>
+
+    <!-- 載入 TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <!-- 載入 Teachable Machine 圖片庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+    <!-- 自訂 JavaScript -->
+    <script>
+        const URL = "/static/my_model/"; // 請確保這是你的模型的正確路徑
+        let model, labelContainer, maxPredictions;
+
+        async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+            try {
+                // 載入模型與元數據
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                console.log("Model loaded successfully.");
+
+                // 設置標籤容器
+                labelContainer = document.getElementById("label-container");
+                for (let i = 0; i < maxPredictions; i++) {
+                    labelContainer.appendChild(document.createElement("div"));
+                }
+
+                // 進行預測
+                predict();
+            } catch (error) {
+                console.error("Error loading the model:", error);
+            }
+        }
+
+        async function predict() {
+            const image = document.getElementById("uploaded-image");
+
+            if (image.complete) {
+                try {
+                    const prediction = await model.predict(image);
+
+                    // 顯示每個類別的相似度
+                    for (let i = 0; i < maxPredictions; i++) {
+                        const classPrediction =
+                            prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(2) + "%";
+                        labelContainer.childNodes[i].innerHTML = classPrediction;
+                    }
+                } catch (error) {
+                    console.error("Error during prediction:", error);
+                }
+            } else {
+                image.onload = predict; // 等待圖片加載完成後再進行預測
+            }
+        }
+
+        // 當網頁載入時，初始化模型
+        window.onload = init;
+    </script>
+</body>
+</html>

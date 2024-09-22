@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamiki</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="menu">&#9776;</button>
+        <h1>體無完膚</h1>
+        <nav>
+            <ul>
+                <li><a href="https://wfsheclass.blogspot.com/" target="_blank">Latest News</a></li>
+                <li><a href="#aboutme">About Us</a></li>
+                <li><a href="#">Reference Materials</a></li>
+                <li><a href="https://github.com/users/Hamichiowo/projects/1/views/1" target="_blank">Code Zone</a></li>
+            </ul>
+        </nav>  
+    </header>   
+    <main>
+        <section class="news">
+            <h2>The recognition platform is complete!</h2>
+            <p>breakthrough. improve. Innovation.</p>
+            <p><a href="{{ url_for('start') }}">Start</a></p>
+        </section>
+
+        <section class="slogan">
+            <blockquote>" People in adolescence often feel anxious about their appearance, but endocrine changes can easily lead to skin problems. In order to improve this situation, I want to design a plan to use image observation to identify skin problems, and propose solutions and how to avoid them. This way you can understand your skin condition. "</blockquote>
+        </section>
+        
+        <section id="aboutme" class="aboutme">
+            <img src="{{ url_for('static', filename='images/shop.png') }}" alt="烘培工坊大安店">
+            <div class="info">
+                <h2>About Us</h2>
+                <p>I am Hamiki, a sophomore at Wanfang High School, currently serving as the president of the Information Club. I also mentor freshmen in competitions. I have experience in cybersecurity, Arduino, competitive programming, web design, and app design.</p>
+            </div>
+        </section>
+
+        <section class="product">
+            <div>
+                <img src="{{ url_for('static', filename='images/p1.png') }}" alt="巴黎風法國土司">
+                <h3>資研社 X 機器人社</h3>
+                <p>Our club focuses on preparing for competitions in autonomous vehicles, dragon boats, ball-rolling, biotechnology, and bionics, attracting students interested in computer science and electrical engineering.</p>
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='images/p2.png') }}" alt="皇家奶油可頌麵包">
+                <h3>Skill</h3>
+                <p>1.Cybersecurity<br>2.Arduino<br>3.Web Design<br>4.App Design<br>5.Competitive Programming</p>
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='images/p3.png') }}" alt="健康營養全麥土司">
+                <h3>school</h3>
+                <p>萬芳高中-實驗班</p>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <p>Welcome to provide your feedback and suggestions!</p>
+            <form>
+                <input type="email" placeholder="Please enter your thoughts." required>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright © 2023 Hamiki All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
