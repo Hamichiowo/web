@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hamiki</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -72,5 +67,23 @@
     <footer>
         <p>Copyright © 2023 Hamiki All Rights Reserved.</p>
     </footer>
+    
+    <script>
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop) {
+                header.style.transform = 'translateY(-100%)'; // 向上消失
+            } else {
+                header.style.transform = 'translateY(0)'; // 顯示
+            }
+            lastScrollTop = scrollTop;
+        });
+    </script>
+
+    
 </body>
 </html>

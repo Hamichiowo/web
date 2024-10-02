@@ -11,7 +11,8 @@ header {
     background-color: rgba(35, 28, 26, 0.8);
     height: 80px;
     width: 100%;
-    position: fixed;    
+    position: fixed;
+    transition: transform 0.3s ease; /* 添加過渡效果 */  
 }
 
 h1 {
